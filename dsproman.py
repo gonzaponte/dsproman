@@ -30,7 +30,9 @@ class SystemStateManager(SystemClient):
 
                 this.log(f"{time.asctime()} - Setting {device}.{attr} to {value}\n")
                 sup.__getattr__(device).__setattr__(attr, value)
-                if attr in "saved running clear_screen".split():
+                if attr in "saved recording running clear_screen".split():
+                    # These are not states properties, but rather operations
+                    # TODO: change them from properties to methods
                     return
 
                 this._states[device, attr] = value
