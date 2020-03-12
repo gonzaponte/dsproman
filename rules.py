@@ -21,6 +21,9 @@ class Rules:
 
 
 class RulesV0(Rules):
+    ambient_template    = "ambient_crystal_{crystal_pos}_exposure_100"
+    background_template = "background_crystal_{crystal_pos}_exposure_100"
+    state_template      = "state_{state_no}_crystal_{crystal_no}_ex_wl_{ex_wl}_exposure_{exposure}_grating_{grating}_looparound_{looparound}"
 
     def spf_position(ex_wl):
         if 390 <= ex_wl < 440: return 1
@@ -56,6 +59,9 @@ class RulesV0(Rules):
 
 
 class RulesV1(Rules):
+    ambient_template    = "ambient_crystal_{crystal_pos}_exposure_100"
+    background_template = "background_crystal_{crystal_pos}_exposure_100"
+    state_template      = "state_{state_no}_crystal_{crystal_no}_fullscan_{full_scan}_exwl_{ex_wl}_monograting_{mono_grating}_exposure_{exposure}"
 
     def spf_position(ex_wl):
         if 390 <= ex_wl < 440: return 1
