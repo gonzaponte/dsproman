@@ -4,12 +4,12 @@ from . database import excitations
 
 
 def surrounding_peak(ex_wl, delta, step=10):
-    return list(range(ex_wl - delta, ex_wl + delta + 1, step))
+    return tuple(range(ex_wl + delta, ex_wl - delta - 1, -step))
 
 def surrounding_peaks(ex_wls, delta, step=10):
     peaks = (surrounding_peak(ex_wl, delta, step) for ex_wl in ex_wls)
     peaks = set(chain.from_iterable(peaks))
-    return sorted(peaks, reverse=True)
+    return list(peaks)
 
 
 class Rules:
@@ -47,9 +47,10 @@ class RulesV0(Rules):
 
     def excitation_wavelengths(full_scan, crystal_type):
         if full_scan:
-            return surrounding_peaks(excitations[crystal_type], 20, 5)
+            exwls = surrounding_peaks(excitations[crystal_type], 20, 5)
         else:
-            return excitations[crystal_type]
+            exwls = sorted(excitations[crystal_type], reverse=True)
+        return sorted(exwls, reverse=True)
 
     def spectro_wavelength(ex_wl):
         return ex_wl + 420 + 10
@@ -89,9 +90,9 @@ class RulesV1(Rules):
 
     def excitation_wavelengths(full_scan, crystal_type):
         if full_scan:
-            return tuple(range(800, 249, 10))
+            return tuple(range(800, 249, -10))
         else:
-            return excitations[crystal_type]
+            return sorted(excitations[crystal_type], reverse=True)
 
     def spectro_wavelength(ex_wl):
         return ex_wl + 420 + 25
