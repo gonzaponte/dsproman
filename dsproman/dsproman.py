@@ -39,6 +39,11 @@ class SystemStateManager(SystemClient):
                     if attr == "shutter":
                         break
 
+                    if attr in "saved recording running clear_screen".split():
+                        # These are not states properties, but rather operations
+                        # TODO: change them from properties to methods
+                        return
+
                     from_device = sup.__getattr__(device).__getattr__(attr)
                     if isinstance(from_device, str):
                         from_device = from_device.split("\r")[0].strip()
@@ -46,10 +51,6 @@ class SystemStateManager(SystemClient):
 
                     changed = value == from_device
 
-                if attr in "saved recording running clear_screen".split():
-                    # These are not states properties, but rather operations
-                    # TODO: change them from properties to methods
-                    return
 
                 this._states[device, attr] = value
 
