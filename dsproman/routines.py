@@ -36,20 +36,12 @@ def take_background(s, filename):
 
 def write_metadata(filename, crystal_mapping, rules):
     with open(filename, "w") as file:
-        file.write("""meta = {
+        text = """meta = {
 
     "crystal_mapping": {
-         "0": "SP_B1_003"  ,
-         "1": "QZ_B2_080"  ,
-         "2": "EmptyHolder",
-         "3": "LiF_B2_149" ,
-         "4": "ZnO_B3_364" ,
-         "5": "Qz_B2_068"  ,
-         "6": "empty"      ,
-         "7": "empty"      ,
-         "8": "empty"      ,
-         "9": "empty"      ,
-        "10": "empty"      ,
-        "11": "empty"      ,
-    }
-}""")
+    """
+        for pos, value in sorted(crystal_mapping.items()):
+            text += f"{repr(pos):>4} : {repr(value):<13},\n"
+
+        text +="}}"
+        file.write(text)
