@@ -56,6 +56,6 @@ class SystemStateManager(SystemClient):
                 if device == "mono" and attr == "grating":
                     # This forces the wavelength to be updated after
                     # changing grating
-                    this.states["mono", "wavelength"] = None
+                    this._states["mono", "wavelength"] = None
 
         return Proxy()
