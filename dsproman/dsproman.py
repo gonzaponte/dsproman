@@ -40,9 +40,9 @@ class SystemStateManager(SystemClient):
                         break
 
                     from_device = sup.__getattr__(device).__getattr__(attr)
-                    from_device = type(value)(from_device)
                     if isinstance(from_device, str):
-                        from_device = from_device.strip()
+                        from_device = from_device.split("\r")[0].strip()
+                    from_device = type(value)(from_device)
 
                     changed = value == from_device
 
