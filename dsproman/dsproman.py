@@ -36,7 +36,10 @@ class SystemStateManager(SystemClient):
                 changed = False
                 while not changed:
                     sup.__getattr__(device).__setattr__(attr, value)
-                    changed = value == sup.__getattr__(device).__getattr__(attr)
+                    from_device = sup.__getattr__(device).__getattr__(attr)
+                    if attr == "shutter":
+                        break
+                    changed = value == from_device
 
                 if attr in "saved recording running clear_screen".split():
                     # These are not states properties, but rather operations
