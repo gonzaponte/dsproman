@@ -14,5 +14,5 @@ BaF = BaF_signals,
 CaF = CaF_signals,
 )
 
-excitations = {key: tuple(map(itemgetter[0], value)) for key, value in signals.items()}
-emmitions   = {key: tuple(map(itemgetter[1], value)) for key, value in signals.items()}
+excitations = {key: tuple(map(itemgetter(0), value)) for key, value in signals.items()}
+emmitions   = {key: tuple(map(itemgetter(1), value)) for key, value in signals.items()}
