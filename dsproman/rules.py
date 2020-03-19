@@ -21,8 +21,8 @@ class Rules:
 
 
 class RulesV0(Rules):
-    ambient_template    = "ambient_crystal_{crystal_pos}_exposure_100"
-    background_template = "background_crystal_{crystal_pos}_exposure_100"
+    ambient_template    = "ambient_crystal_{crystal_no}_exposure_100"
+    background_template = "background_crystal_{crystal_no}_exposure_100"
     state_template      = "state_{state_no}_crystal_{crystal_no}_ex_wl_{ex_wl}_exposure_{exposure}_grating_{grating}_looparound_{looparound}"
 
     def spf_position(ex_wl):
@@ -49,7 +49,7 @@ class RulesV0(Rules):
         if full_scan:
             exwls = surrounding_peaks(excitations[crystal_type], 20, 5)
         else:
-            exwls = sorted(excitations[crystal_type], reverse=True)
+            exwls = sorted(set(excitations[crystal_type]), reverse=True)
         return sorted(exwls, reverse=True)
 
     def spectro_wavelength(ex_wl):
@@ -60,8 +60,8 @@ class RulesV0(Rules):
 
 
 class RulesV1(Rules):
-    ambient_template    = "ambient_crystal_{crystal_pos}_exposure_100"
-    background_template = "background_crystal_{crystal_pos}_exposure_100"
+    ambient_template    = "ambient_crystal_{crystal_no}_exposure_100"
+    background_template = "background_crystal_{crystal_no}_exposure_100"
     state_template      = "state_{state_no}_crystal_{crystal_no}_fullscan_{full_scan}_exwl_{ex_wl}_monograting_{mono_grating}_exposure_{exposure}"
 
     def spf_position(ex_wl):
@@ -92,7 +92,7 @@ class RulesV1(Rules):
         if full_scan:
             return tuple(range(800, 249, -10))
         else:
-            return sorted(excitations[crystal_type], reverse=True)
+            return sorted(set(excitations[crystal_type]), reverse=True)
 
     def spectro_wavelength(ex_wl):
         return ex_wl + 420 + 25
