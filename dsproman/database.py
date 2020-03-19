@@ -1,5 +1,7 @@
 from operator import itemgetter
 
+crystal_types = "Sp", "Qz", "LiF", "BaF", "CaF"
+
 Sp_signals  = (250, 400),
 Qz_signals  = (250, 346),
 LiF_signals = (260, 331), (450, 680), (450, 530)
