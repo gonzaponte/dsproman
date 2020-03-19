@@ -85,7 +85,7 @@ class RulesV1(Rules):
     def flp_exc_position(ex_wl):
         return "up" if ex_wl >= 450 else "down"
 
-    def flp_emm_position(ex_wl):
+    def flp_em_position(ex_wl):
         return "up" if ex_wl >= 300 else "down"
 
     def excitation_wavelengths(full_scan, crystal_type):
