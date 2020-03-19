@@ -79,7 +79,7 @@ class RulesV1(Rules):
         if 450 <= ex_wl < 500: return 3
         if 500 <= ex_wl < 550: return 4
         if 550 <= ex_wl      : return 5
-        if 250 <= ex_wl < 300: return 6
+        if 250 <= ex_wl < 350: return 6
         print(f"WARNING: No LPFW rule set for excitation wavelength {ex_wl}")
 
     def flp_exc_position(ex_wl):
