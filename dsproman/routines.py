@@ -1,5 +1,13 @@
 from . utils import temporary
 
+
+def initialize(s):
+    s.source        .power      = 100
+    s.source_shutter.control    = "camera"
+    s.spectro       .shutter    = "auto"
+    s.spectro       .slit_width = 1000
+
+
 def take_data(s, filename):
     s.spectro    .save_path = f"{filename}_signal.asc"
     s.power_meter.save_path = f"{filename}_power.asc"
