@@ -39,7 +39,7 @@ class SystemStateManager(SystemClient):
                     if attr == "shutter":
                         break
 
-                    if attr in "saved recording running clear_screen".split():
+                    if attr in "saved running clear_screen".split():
                         # These are not states properties, but rather operations
                         # TODO: change them from properties to methods
                         return
