@@ -7,10 +7,10 @@ from devserve.clients import SystemClient
 
 
 class SystemStateManager(SystemClient):
-    def __init__(self, *args, extra_logs=()):
+    def __init__(self, *args):
         self._states   = {}
         self._database = {}
-        self._logs     = [sys.stdout, *extra_logs]
+        self.logs      = [sys.stdout]
 
         super().__init__(*args)
 
