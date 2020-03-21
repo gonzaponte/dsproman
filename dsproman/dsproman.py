@@ -1,21 +1,41 @@
 import sys
 import time
 
+from itertools import chain
+
 from devserve.clients import SystemClient
 
 
 class SystemStateManager(SystemClient):
     def __init__(self, *args, extra_logs=()):
-        self._states = {}
-
-        self.logs = [sys.stdout, *extra_logs]
+        self._states   = {}
+        self._database = {}
+        self._logs     = [sys.stdout, *extra_logs]
 
         super().__init__(*args)
 
+    def add_database_entry(self, state_no):
+        self._database[state_no] = dict(self._states)
+
     def log(self, *args, **kwargs):
-        for log in self.logs:
+        for log in self._logs:
             log.write(*args, **kwargs)
             log.flush()
+
+    def save(self, filename):
+        self.log(f"{time.asctime()} - Storing database in {filename}")
+        columns = sorted(set(chain.from_iterable((d.keys() for d in self._data))))
+
+        lines = [" ".join(["state"] + list(map("_".join, columns)))]
+        for state, data in sorted(self._database.items()):
+            values = tuple(data.get(column, "nan") for column in columns)
+            line   = " ".join((state) + values)
+            lines.append(line)
+
+        text = "\n".join(lines + [""])
+        open(filename, "w").write(text)
+
+        self.log(f"{time.asctime()} - Database stored successfully")
 
     def __getattr__(self, device):
         this = self
