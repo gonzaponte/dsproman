@@ -18,7 +18,7 @@ class SystemStateManager(SystemClient):
         self._database[state_no] = dict(self._states)
 
     def log(self, *args, **kwargs):
-        for log in self._logs:
+        for log in self.logs:
             log.write(*args, **kwargs)
             log.flush()
 
