@@ -22,14 +22,15 @@ class SystemStateManager(SystemClient):
             log.write(*args, **kwargs)
             log.flush()
 
-    def save(self, filename):
+    def save(self, filename, sep=","):
         self.log(f"{time.asctime()} - Storing database in {filename}")
-        columns = sorted(set(chain.from_iterable((d.keys() for d in self._data))))
+        columns = sorted(set(chain.from_iterable((d.keys() for d in self._database.values()))))
 
-        lines = [" ".join(["state"] + list(map("_".join, columns)))]
+        lines = [sep.join(["state"] + list(map("_".join, columns)))]
         for state, data in sorted(self._database.items()):
             values = tuple(data.get(column, "nan") for column in columns)
-            line   = " ".join((state) + values)
+            values = (state,) + values
+            line   = sep.join(map(str, values))
             lines.append(line)
 
         text = "\n".join(lines + [""])
