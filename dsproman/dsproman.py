@@ -68,7 +68,11 @@ class SystemStateManager(SystemClient):
                     from_device = sup.__getattr__(device).__getattr__(attr)
                     if isinstance(from_device, str):
                         from_device = from_device.split("\r")[0].strip()
-                    from_device = type(value)(from_device)
+
+                    try:
+                        from_device = type(value)(from_device)
+                    except TypeError:
+                        from_device = None
 
                     changed = value == from_device
 
