@@ -1,5 +1,6 @@
 from itertools import chain
 
+from . database import crystal_types
 from . database import excitations
 
 
@@ -88,18 +89,20 @@ class RulesV1(Rules):
     def flp_em_position(ex_wl):
         return "up" if ex_wl >= 300 else "down"
 
-    def excitation_wavelengths(full_scan, crystal_type):
+    def excitation_wavelengths(full_scan, crystal_type=None):
         if full_scan:
             return tuple(range(800, 249, -10))
-        else:
+        elif crystal_type in crystal_types:
             return sorted(set(excitations[crystal_type]), reverse=True)
+        else:
+            raise ValueError(f"Attempted to get specific wavelengths for unknown crystal type {crystal_type}")
 
     def spectro_wavelength(ex_wl):
         return ex_wl + 420 + 25
 
-    def exposures(ex_wl, crystal_type):
+    def exposures(ex_wl=None, crystal_type=None):
         e = 0.2, 2, 10
-        if ex_wl in excitations[crystal_type]:
+        if ex_wl is not None and crystal_type is not None and ex_wl in excitations[crystal_type]:
             e = e + (0.2,) * 5 + (2,) * 5
 
         return e
