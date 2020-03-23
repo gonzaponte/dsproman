@@ -23,7 +23,7 @@ class SystemStateManager(SystemClient):
             log.flush()
 
     def save(self, filename, sep=","):
-        self.log(f"{time.asctime()} - Storing database in {filename}")
+        self.log(f"{time.asctime()} - Storing database in {filename}\n")
         columns = sorted(set(chain.from_iterable((d.keys() for d in self._database.values()))))
 
         lines = [sep.join(["state"] + list(map("_".join, columns)))]
@@ -36,7 +36,7 @@ class SystemStateManager(SystemClient):
         text = "\n".join(lines + [""])
         open(filename, "w").write(text)
 
-        self.log(f"{time.asctime()} - Database stored successfully")
+        self.log(f"{time.asctime()} - Database stored successfully\n")
 
     def __getattr__(self, device):
         this = self
