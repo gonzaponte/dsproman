@@ -61,8 +61,8 @@ class RulesV0(Rules):
 
 
 class RulesV1(Rules):
-    ambient_template    = "ambient_crystal_{crystal_no}_full_scan_{full_scan}_exposure_100"
-    background_template = "background_crystal_{crystal_no}_{full_scan}_exposure_100"
+    ambient_template    = "ambient_crystal_{crystal_no}_fullscan_{full_scan}_exposure_100"
+    background_template = "background_crystal_{crystal_no}_fullscan_{full_scan}_exposure_100"
     state_template      = "state_{state_no}_crystal_{crystal_no}_fullscan_{full_scan}_exwl_{ex_wl}_monograting_{mono_grating}_exposure_{exposure}"
 
     def spf_position(ex_wl):
