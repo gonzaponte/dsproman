@@ -48,7 +48,7 @@ def take_baseline(s, filename, n_measurements=10):
          temporary(s, "spectro", "shutter", "closed"):
         s.source_shutter.on         = False
         s.spectro       .wavelength = 250 + 420 # 420 is approximately the middle of the wl range
-        s.spectro       .exposure   = 0.01
+        s.spectro       .exposure   = 0.1
 
         for n in range(n_measurements):
             s.spectro.save_path = f"{filename}_{n}_signal.asc"
