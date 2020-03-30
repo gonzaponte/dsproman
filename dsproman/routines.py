@@ -43,16 +43,17 @@ def take_background(s, filename):
         s.spectro.saved     = True
 
 
-def take_baseline(s, filename):
+def take_baseline(s, filename, n_measurements=10):
     with temporary(s, "source_shutter", "control", "computer"), \
          temporary(s, "spectro", "shutter", "closed"):
         s.source_shutter.on         = False
         s.spectro       .wavelength = 250 + 420 # 420 is approximately the middle of the wl range
         s.spectro       .exposure   = 0.01
 
-        s.spectro.save_path = f"{filename}_signal.asc"
-        s.spectro.running   = True
-        s.spectro.saved     = True
+        for n in range(n_measurements):
+            s.spectro.save_path = f"{filename}_{n}_signal.asc"
+            s.spectro.running   = True
+            s.spectro.saved     = True
 
 
 def write_metadata(filename, crystal_mapping, rules):
