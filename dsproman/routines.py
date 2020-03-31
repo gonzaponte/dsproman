@@ -1,3 +1,5 @@
+from time import sleep
+
 from . utils import temporary
 
 
@@ -53,6 +55,7 @@ def take_baseline(s, filename, n_measurements=10):
         for n in range(n_measurements):
             s.spectro.save_path = f"{filename}_{n}_signal.asc"
             s.spectro.running   = True
+            sleep(0.2)
             s.spectro.saved     = True
 
 
