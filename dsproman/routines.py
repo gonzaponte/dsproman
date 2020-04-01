@@ -57,6 +57,7 @@ def take_baseline(s, filename, n_measurements=10):
             s.spectro.running   = True
             sleep(1)
             s.spectro.saved     = True
+            sleep(0.1)
 
 
 def write_metadata(filename, crystal_mapping, rules):
