@@ -57,7 +57,7 @@ class RulesV0(Rules):
         return ex_wl + 420 + 10
 
     def exposures():
-        return (0.1, 1, 10) + (0.1,) * 5 + (1,) * 5
+        return (0.1, 1, 10) + (0.1,) * 4 + (1,) * 4 + (10,)
 
 
 class RulesV1(Rules):
