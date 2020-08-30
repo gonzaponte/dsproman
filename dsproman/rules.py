@@ -107,3 +107,8 @@ class RulesV1(Rules):
             e = e + (0.2,) * 5 + (2,) * 5
 
         return e
+
+
+class RulesV2(RulesV1):
+    def mono_gratings(self, wl):
+        return (1,) if ex_wl < 400 else (2, 1) if ex_wl == 400 else (2,)
