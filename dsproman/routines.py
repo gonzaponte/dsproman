@@ -22,6 +22,21 @@ def take_data(s, filename, state_no=None):
     s.power_meter.saved     = True
 
 
+def take_data2(s, filename, state_no=None):
+    s.spectro      .save_path = f"{filename}_signal.asc"
+    s.power_meter_a.save_path = f"{filename}_power_crystal.asc"
+    s.power_meter_b.save_path = f"{filename}_power_sample.asc"
+
+    s.add_database_entry(state_no)
+    with temporary(s, "power_meter_a", "recording", True):
+        with temporary(s, "power_meter_b", "recording", True):
+            s.spectro.running   = True
+
+    s.spectro      .saved = True
+    s.power_meter_a.saved = True
+    s.power_meter_b.saved = True
+
+
 def take_ambient(s, filename):
     with temporary(s, "source_shutter", "control", "computer"):
         s.source_shutter.on         = False
@@ -70,4 +85,14 @@ def write_metadata(filename, crystal_mapping, rules):
             text += f"{repr(pos):>4} : {repr(value):<13},\n"
 
         text +="}}"
+        file.write(text)
+
+
+def write_metadata2(filename, crystal_no, rules):
+    with open(filename, "w") as file:
+        text = f"""meta = {{
+
+    "crystal_mapping": {{ 0 : {crystal_no}}}
+    }}
+    """
         file.write(text)
