@@ -110,5 +110,5 @@ class RulesV1(Rules):
 
 
 class RulesV2(RulesV1):
-    def mono_gratings(self, wl):
+    def mono_gratings(ex_wl):
         return (1,) if ex_wl < 400 else (2, 1) if ex_wl == 400 else (2,)
