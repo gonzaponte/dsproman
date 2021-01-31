@@ -19,6 +19,7 @@ class SystemStateManager(SystemClient):
 
     def log(self, *args, **kwargs):
         for log in self.logs:
+            if log.closed: continue
             log.write(*args, **kwargs)
             log.flush()
 
