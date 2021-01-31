@@ -112,3 +112,6 @@ class RulesV1(Rules):
 class RulesV2(RulesV1):
     def mono_gratings(ex_wl):
         return (1,) if ex_wl < 400 else (2, 1) if ex_wl == 400 else (2,)
+
+    def flp_em_position(ex_wl):
+        return "up" if ex_wl >= 250 else "down"
