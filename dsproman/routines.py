@@ -8,6 +8,8 @@ def initialize(s):
     s.source_shutter.control    = "camera"
     s.spectro       .shutter    = "auto"
     s.spectro       .slit_width = 1000
+    s.power_meter_a .count      = 100
+    s.power_meter_b .count      = 100
 
 
 def take_data(s, filename, state_no=None):
