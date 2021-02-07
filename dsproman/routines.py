@@ -26,8 +26,8 @@ def take_data(s, filename, state_no=None):
 
 def take_data2(s, filename, state_no=None):
     s.spectro      .save_path = f"{filename}_signal.asc"
-    s.power_meter_a.save_path = f"{filename}_power_crystal.asc"
-    s.power_meter_b.save_path = f"{filename}_power_sample.asc"
+    s.power_meter_b.save_path = f"{filename}_power_crystal.asc"
+    s.power_meter_a.save_path = f"{filename}_power_sample.asc"
 
     s.add_database_entry(state_no)
     with temporary(s, "power_meter_a", "recording", True):
