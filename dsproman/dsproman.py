@@ -44,7 +44,7 @@ class SystemStateManager(SystemClient):
         sup  = super()
         class Proxy:
             def __getattr__(self, attr):
-                if (device, attr) not in this._states:
+                if (device, attr) not in this._states or (device.startswith("power_meter") and attr == "power"):
                     this._states[device, attr] = sup.__getattr__(device).__getattr__(attr)
 
                 return this._states[device, attr]
