@@ -77,6 +77,18 @@ def take_baseline(s, filename, n_measurements=10):
             sleep(0.1)
 
 
+def set_components(s, rules, ex_wl, exposure):
+    s.spfw.position            = rules.spf_position      (ex_wl)
+    s.lpfw.position            = rules.lpf_position      (ex_wl)
+    s.flipper .position        = rules.flp_exc_position  (ex_wl)
+    s.flipperB.position        = rules.flp_em_position   (ex_wl)
+    s.spectro.grating          = rules.spectro_grating   (ex_wl)
+    s.spectro.wavelength       = rules.spectro_wavelength(ex_wl)
+    s.power_meter_a.wavelength = ex_wl
+    s.power_meter_b.wavelength = ex_wl
+    s.spectro.exposure         = exposure
+
+
 def write_metadata(filename, crystal_mapping, rules):
     with open(filename, "w") as file:
         text = """meta = {
