@@ -17,6 +17,10 @@ class Rules:
     def mono_gratings(ex_wl):
         return (2,) if ex_wl >= 400 else (1, 2)
 
+    @classmethod
+    def mono_grating(cls, ex_wl):
+        return cls.mono_gratings(ex_wl)[0]
+
     def spectro_grating(ex_wl):
         return 2 if ex_wl >= 400 else 1
 
