@@ -77,7 +77,12 @@ def take_baseline(s, filename, n_measurements=10):
             sleep(0.1)
 
 
-def set_components(s, rules, ex_wl, exposure):
+def set_components(s, rules, ex_wl, exposure, grating=None):
+    if grating is None:
+        s.mono.grating         = rules.mono_grating      (ex_wl)
+    else:
+        s.mono.grating         = grating
+    s.mono.wavelength          = ex_wl
     s.spfw.position            = rules.spf_position      (ex_wl)
     s.lpfw.position            = rules.lpf_position      (ex_wl)
     s.flipper .position        = rules.flp_exc_position  (ex_wl)
