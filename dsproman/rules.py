@@ -120,5 +120,6 @@ class RulesV2(RulesV1):
     def flp_em_position(ex_wl):
         return "up" if ex_wl >= 250 else "down"
 
+
 class RulesV3(RulesV2):
-    reference_template = "reference_wl_{ex_wl}_exposure_{exposure}"
+    reference_template = "reference_{crystal_no}_wl_{ex_wl}_exposure_{exposure}"
