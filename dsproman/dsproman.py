@@ -72,7 +72,7 @@ class SystemStateManager(SystemClient):
 
                     try:
                         from_device = type(value)(from_device)
-                    except TypeError:
+                    except (TypeError, ValueError):
                         from_device = None
 
                     changed = value == from_device
