@@ -9,7 +9,7 @@ def initialize(s):
     s.spectro       .shutter    = "auto"
     s.spectro       .slit_width = 1000
     s.power_meter_a .count      = 100
-    s.power_meter_b .count      = 100
+#    s.power_meter_b .count      = 100
 
 
 def take_data(s, filename, state_no=None):
@@ -26,17 +26,17 @@ def take_data(s, filename, state_no=None):
 
 def take_data2(s, filename, state_no=None):
     s.spectro      .save_path = f"{filename}_signal.asc"
-    s.power_meter_b.save_path = f"{filename}_power_crystal.asc"
+#    s.power_meter_b.save_path = f"{filename}_power_crystal.asc"
     s.power_meter_a.save_path = f"{filename}_power_sample.asc"
 
     s.add_database_entry(state_no)
     with temporary(s, "power_meter_a", "recording", True):
-        with temporary(s, "power_meter_b", "recording", True):
+#        with temporary(s, "power_meter_b", "recording", True):
             s.spectro.running   = True
 
     s.spectro      .saved = True
     s.power_meter_a.saved = True
-    s.power_meter_b.saved = True
+#    s.power_meter_b.saved = True
 
 
 def take_ambient(s, filename):
@@ -90,7 +90,7 @@ def set_components(s, rules, ex_wl, exposure, grating=None):
     s.spectro.grating          = rules.spectro_grating   (ex_wl)
     s.spectro.wavelength       = rules.spectro_wavelength(ex_wl)
     s.power_meter_a.wavelength = ex_wl
-    s.power_meter_b.wavelength = ex_wl
+#    s.power_meter_b.wavelength = ex_wl
     s.spectro.exposure         = exposure
 
 
