@@ -24,11 +24,17 @@ class Rules:
     def spectro_grating(ex_wl):
         return 2 if ex_wl >= 400 else 1
 
+    @classmethod
+    def spectro_wavelength(csl, ex_wl):
+        return ex_wl + csl.camera_wl_range/2 + csl.spectro_offset
+
 
 class RulesV0(Rules):
     ambient_template    = "ambient_crystal_{crystal_no}_exposure_100"
     background_template = "background_crystal_{crystal_no}_exposure_100"
     state_template      = "state_{state_no}_crystal_{crystal_no}_ex_wl_{ex_wl}_exposure_{exposure}_grating_{grating}_looparound_{looparound}"
+    camera_wl_range     = 840
+    spectro_offset      =  10
 
     def spf_position(ex_wl):
         if 390 <= ex_wl < 440: return 1
@@ -57,9 +63,6 @@ class RulesV0(Rules):
             exwls = sorted(set(excitations[crystal_type]), reverse=True)
         return sorted(exwls, reverse=True)
 
-    def spectro_wavelength(ex_wl):
-        return ex_wl + 420 + 10
-
     def exposures():
         return (0.1, 1, 10) + (0.1,) * 4 + (1,) * 4 + (10,)
 
@@ -69,6 +72,7 @@ class RulesV1(Rules):
     background_template = "background_crystal_{crystal_no}_fullscan_{full_scan}_exposure_100"
     baseline_template   = "baseline_crystal_{crystal_no}_fullscan_{full_scan}"
     state_template      = "state_{state_no}_crystal_{crystal_no}_fullscan_{full_scan}_exwl_{ex_wl}_monograting_{mono_grating}_exposure_{exposure}"
+    spectro_offset      = 25
 
     def spf_position(ex_wl):
         if 390 <= ex_wl < 440: return 1
@@ -102,9 +106,6 @@ class RulesV1(Rules):
         else:
             raise ValueError(f"Attempted to get specific wavelengths for unknown crystal type {crystal_type}")
 
-    def spectro_wavelength(ex_wl):
-        return ex_wl + 420 + 25
-
     def exposures(ex_wl=None, crystal_type=None):
         e = 0.2, 2, 10
         if ex_wl is not None and crystal_type is not None and ex_wl in excitations[crystal_type]:
@@ -123,3 +124,4 @@ class RulesV2(RulesV1):
 
 class RulesV3(RulesV2):
     reference_template = "reference_{crystal_no}_wl_{ex_wl}_exposure_{exposure}"
+    camera_wl_range    = 885
