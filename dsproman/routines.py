@@ -111,7 +111,7 @@ def write_metadata2(filename, crystal_no, rules):
     with open(filename, "w") as file:
         text = f"""meta = {{
 
-    "crystal_mapping": {{ 0 : {crystal_no}}}
+    "crystal_mapping": {{ 0 : {repr(crystal_no)}}}
     }}
     """
         file.write(text)
