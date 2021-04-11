@@ -124,4 +124,4 @@ class RulesV2(RulesV1):
 
 class RulesV3(RulesV2):
     reference_template = "reference_{crystal_no}_wl_{ex_wl}_exposure_{exposure}"
-    camera_wl_range    = 885
+    camera_wl_range    = 900
